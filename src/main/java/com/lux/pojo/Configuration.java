@@ -1,6 +1,7 @@
 package com.lux.pojo;
 
 import javax.sql.DataSource;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -9,14 +10,13 @@ import java.util.Map;
  **/
 public class Configuration {
     private DataSource dataSource;
-    private Map<String, MappedStatement> statementMap;
+    private Map<String, MappedStatement> statementMap = new HashMap<>();
 
     public Configuration() {
     }
 
-    public Configuration(DataSource dataSource, Map<String, MappedStatement> statementMap) {
+    public Configuration(DataSource dataSource) {
         this.dataSource = dataSource;
-        this.statementMap = statementMap;
     }
 
     public DataSource getDataSource() {

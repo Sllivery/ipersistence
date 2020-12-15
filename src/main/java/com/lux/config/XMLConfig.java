@@ -24,7 +24,7 @@ public class XMLConfig {
         this.configuration = new Configuration();
     }
 
-    public Configuration parse (InputStream in) throws DocumentException, PropertyVetoException {
+    public Configuration parse (InputStream in) throws Exception {
         Document document = new SAXReader().read(in);
         //遍历config文件,将数据库配置到datasource里面
         Element configurationRoot = document.getRootElement();//根节点
@@ -53,7 +53,7 @@ public class XMLConfig {
     }
 
     //读取config文件中的mapper,每个mapper解析一遍
-    private void buildMappedStatement(Element root) throws DocumentException {
+    private void buildMappedStatement(Element root) throws Exception {
         List<Element> list = root.selectNodes("//mapper");
         //获取所有的mapper送进另一个对象封装
         for (Element element : list) {

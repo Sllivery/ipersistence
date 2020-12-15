@@ -6,14 +6,14 @@ package com.lux.pojo;
  **/
 public class MappedStatement {
     private String statementId;
-    private String resultType;
-    private String paraType;
+    private Class<?> resultClass;
+    private Class<?> paraClass;
     private String sql;
 
-    public MappedStatement(String statementId, String resultType, String paraType, String sql) {
+    public MappedStatement(String statementId, Class<?> resultClass, Class<?> paraClass, String sql) {
         this.statementId = statementId;
-        this.resultType = resultType;
-        this.paraType = paraType;
+        this.resultClass = resultClass;
+        this.paraClass = paraClass;
         this.sql = sql;
     }
 
@@ -25,20 +25,20 @@ public class MappedStatement {
         this.statementId = statementId;
     }
 
-    public String getResultType() {
-        return resultType;
+    public Class<?> getResultClass() {
+        return resultClass;
     }
 
-    public void setResultType(String resultType) {
-        this.resultType = resultType;
+    public void setResultClass(Class<?> resultClass) {
+        this.resultClass = resultClass;
     }
 
-    public String getParaType() {
-        return paraType;
+    public Class<?> getParaClass() {
+        return paraClass;
     }
 
-    public void setParaType(String paraType) {
-        this.paraType = paraType;
+    public void setParaClass(Class<?> paraClass) {
+        this.paraClass = paraClass;
     }
 
     public String getSql() {

@@ -12,10 +12,10 @@ import java.io.InputStream;
  * @Create 2020-12-2020/12/11
  **/
 public class SqlSessionFactoryBuilder {
-    public SqlSessionFactory build(InputStream inputStream) throws PropertyVetoException, DocumentException {
+    public SqlSessionFactory build(InputStream inputStream) throws Exception {
         //需要解析inputstream,将其中的节点添加进容器
         XMLConfig xmlConfig = new XMLConfig();
         Configuration configuration = xmlConfig.parse(inputStream);
-        return new SqlSessionFactory(configuration);
+        return new DefaultSqlSessionFactory(configuration);
     }
 }

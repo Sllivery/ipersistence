@@ -21,14 +21,14 @@ public class MappedConfig {
     public MappedConfig(Configuration configuration){
         this.configuration = configuration;
     }
-    public void parse(String mapperPath) throws DocumentException {
+    public void parse(String mapperPath) throws Exception {
         InputStream inputStream = Resources.getResourceAsStream(mapperPath);
         Document document = new SAXReader().read(inputStream);
         Element root = document.getRootElement();
         buildMappedStatement(root);
     }
     //配置MappedStatement,填进Configuration
-    private void buildMappedStatement(Element root){
+    private void buildMappedStatement (Element root) throws ClassNotFoundException{
         List<Element> selectNodes = root.selectNodes("//select");
         if(selectNodes.size() > 0){
             buildMappedStatement(root, selectNodes);
@@ -43,16 +43,26 @@ public class MappedConfig {
         }
     }
 
-    private void buildMappedStatement(Element root, List<Element> nodes){
+    private void buildMappedStatement(Element root, List<Element> nodes) throws ClassNotFoundException{
         String nameSpace = root.attributeValue("namespace");
         for (Element node : nodes) {
             String id = node.attributeValue("id");
             String resultType = node.attributeValue("resultType");
             String paramType = node.attributeValue("paramType");
-            String sql = node.getText();
-            MappedStatement mappedStatement = new MappedStatement(nameSpace+id, resultType, paramType, sql);
-            Map<String, MappedStatement> statementMap = configuration.getStatementMap();
-            statementMap.put(nameSpace + id, mappedStatement);
+            //获取结果和参数对象
+            Class<?> resultClass = getClassType(resultType);
+            Class<?> paramClass = getClassType(paramType);
+            String sql = node.getTextTrim();
+            MappedStatement mappedStatement = new MappedStatement(id, resultClass, paramClass, sql);
+            configuration.getStatementMap().put(nameSpace + "." + id, mappedStatement);
         }
+    }
+
+    private Class<?> getClassType(String typeString) throws ClassNotFoundException{
+        if (typeString == null){
+            return null;
+        }
+        Class<?> aClass = Class.forName(typeString);
+        return aClass;
     }
 }
