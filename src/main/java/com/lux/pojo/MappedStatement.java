@@ -6,11 +6,11 @@ package com.lux.pojo;
  **/
 public class MappedStatement {
     private String statementId;
-    private Class<?> resultClass;
-    private Class<?> paraClass;
+    private String resultClass;
+    private String paraClass;
     private String sql;
 
-    public MappedStatement(String statementId, Class<?> resultClass, Class<?> paraClass, String sql) {
+    public MappedStatement(String statementId, String resultClass, String paraClass, String sql) {
         this.statementId = statementId;
         this.resultClass = resultClass;
         this.paraClass = paraClass;
@@ -25,19 +25,19 @@ public class MappedStatement {
         this.statementId = statementId;
     }
 
-    public Class<?> getResultClass() {
+    public String getResultClass() {
         return resultClass;
     }
 
-    public void setResultClass(Class<?> resultClass) {
+    public void setResultClass(String resultClass) {
         this.resultClass = resultClass;
     }
 
-    public Class<?> getParaClass() {
+    public String getParaClass() {
         return paraClass;
     }
 
-    public void setParaClass(Class<?> paraClass) {
+    public void setParaClass(String paraClass) {
         this.paraClass = paraClass;
     }
 

@@ -49,11 +49,8 @@ public class MappedConfig {
             String id = node.attributeValue("id");
             String resultType = node.attributeValue("resultType");
             String paramType = node.attributeValue("paramType");
-            //获取结果和参数对象
-            Class<?> resultClass = getClassType(resultType);
-            Class<?> paramClass = getClassType(paramType);
             String sql = node.getTextTrim();
-            MappedStatement mappedStatement = new MappedStatement(id, resultClass, paramClass, sql);
+            MappedStatement mappedStatement = new MappedStatement(id, resultType, paramType, sql);
             configuration.getStatementMap().put(nameSpace + "." + id, mappedStatement);
         }
     }

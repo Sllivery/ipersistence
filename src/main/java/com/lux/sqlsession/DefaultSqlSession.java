@@ -45,7 +45,16 @@ public class DefaultSqlSession implements SqlSession{
     }
 
     @Override
+    /**
+     * 这个方法可以好好看一下
+     * 问题一:泛型 格式记住
+     * 问题二:class对象和proxy创建实例的异同
+     * 问题三:Proxy.newInstance是创建哪个参数的代理对象 是Class[] interfaces这个参数.
+     *  所以创建完代理对象后,调用代理对象的某个方法,可以获取到它的方法名
+     */
     public <T> T getMapper(Class<?> mapperClass) {
+        //这个方法的目的是:通过获取代理对象的方法名,调用对应的sqlSession的方法
+        //但是有个问题:sqlSession的方法并不能完全覆盖自己写的Mapper对象的方法啊
         return null;
     }
 }

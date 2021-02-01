@@ -15,6 +15,6 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory{
 
     @Override
     public SqlSession openSqlSession() {
-        return null;
+        return new DefaultSqlSession(configuration);
     }
 }
